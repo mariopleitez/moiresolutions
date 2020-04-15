@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Moiré Business Solutions</title>
+<meta charset="utf-8">    
+    <style>
+    .circleStyle {
+        stroke: #000;
+        stroke-width: 0.01;
+        fill: none;
+    }
+    .divCenter {
+        margin: 25px 300px;
+    }
+    h1 {
+        font-family: 'PT Serif', serif;
+        font-size: 500%;
+    
+    }
+    h3 {
+        font-family: 'PT Serif', serif;
+    
+    }
+
+   q {
+        font-family: 'PT Serif', serif;
+        font-size: 100%;
+       
+    
+    }
+ 
+    </style>    
+
+
+<style>
+    .footer {
+        font-family: 'PT Serif', serif;
+        font-size: 75%;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: rgb(224,224,224);
+        color: rgb(50, 50, 50);
+        text-align: center;
+    }
+    </style>
+    
+</head>
+<body>
+
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
+
+  
+    <div style="text-align:center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="500" xmlns:xlink="http://www.w3.org/1999/xlink" id="moireAnimation1" viewBox="-4 -4 8 8">
+        </svg>
+    </div>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>    
+<script>
+
+    var t1 = new TimelineLite();
+    var numberBigCircles = 5,
+        depthBigCircles = 40,
+        zoomFactor = 1;
+        
+    function createMoireCircles() {
+    
+        var allCircle = d3.select("svg#moireAnimation1")
+                        .append("g")
+                        .attr("id", "all_circle");
+
+        for (var i=0; i < numberBigCircles; i++) {
+            var moireCircle = allCircle
+                        .append("g")
+                        .attr("id", "moire_circle" + i);
+            
+            for (var j=0; j<depthBigCircles; j++) {
+                moireCircle
+                .append("circle")
+                .attr("class", "circleStyle")
+                .attr("cx", "0")
+                .attr("cy", "0")
+                .attr("r", (j/depthBigCircles * 2 * zoomFactor));
+            }
+        }        
+    }
+    
+    function animateMoireCircles() {
+
+        t1.staggerFrom("#moire_circle0 circle", 3, {x:-2.5, autoAlpha:0, scale:0, transformOrigin:"50% 50%"}, 0.1, 0)
+          .staggerFrom("#moire_circle1 circle", 3, {x:2.5, autoAlpha:0, scale:0, transformOrigin:"50% 50%"}, 0.1, 0)
+          .staggerFrom("#moire_circle2 circle", 3, {y:2.5, autoAlpha:0, scale:0, transformOrigin:"50% 50%"}, 0.1, 0)
+          .staggerFrom("#moire_circle3 circle", 3, {y:-2.5, autoAlpha:0, scale:0, transformOrigin:"50% 50%"}, 0.1, 0)
+          .staggerFrom("#moire_circle4 circle", 3, {autoAlpha:0, scale:0, transformOrigin:"50% 50%"}, 0.1, 0);
+        
+        t1.to("#moire_circle0", 5, {x:-1.5, ease: Power1.easeInOut, repeat:-1, yoyo:true}, 3 + depthBigCircles * 0.1)
+          .to("#moire_circle1", 5, {x:1.5, ease: Power1.easeInOut, repeat:-1, yoyo:true}, 3 + depthBigCircles * 0.1)
+          .to("#moire_circle2", 5, {y:1.5, ease: Power1.easeInOut, repeat:-1, yoyo:true}, 3 + depthBigCircles * 0.1)
+          .to("#moire_circle3", 5, {y:-1.5, ease: Power1.easeInOut, repeat:-1, yoyo:true}, 3 + depthBigCircles * 0.1);        
+    }
+    
+    createMoireCircles();
+    animateMoireCircles();
+    
+</script>
+
+<div align="center">
+     <h1>Moirè</h1> 
+    <h3>Business. Solutions.</h3>
+    
+    <div align="center" class="divCenter">
+    <q>A moiré pattern is a large-scale interference pattern. For the moiré interference pattern to appear, two patterns must not be completely identical in that they must be different, but with a similar pitch. 
+        Moiré is about engineering business solutions through software. <br>
+        Moiré Business Solutions is about showing the brilliance and dedication from the talent in El Salvador to the world.
+    </q>
+</div>
+</div>
+
+
+<div class="footer">
+    <p>&copy; 2020 - San Salvador, El Salvador | info@moiresolutions.com</p>
+  </div>
+
+</body>
+</html>
